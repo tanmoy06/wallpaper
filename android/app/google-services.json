@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "634050526434",
+    "project_id": "wallpaper-21223",
+    "storage_bucket": "wallpaper-21223.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634050526434:android:b7d4c53cbd9560b23232bb",
+        "android_client_info": {
+          "package_name": "com.tanmoy.wallpaper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA80JbrzVuxkOUO4X57uCVl2OpBYFlC-U4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
