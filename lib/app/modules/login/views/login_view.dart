@@ -10,37 +10,46 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
         centerTitle: true,
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              decoration: InputDecoration(
+              controller: controller.emailController,
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.email),
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
-              decoration: InputDecoration(
+              controller: controller.passController,
+              decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
                 prefixIcon: Icon(Icons.lock),
               ),
               obscureText: true,
             ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: null, // No logic, button disabled
-              child: Text('Login'),
+            const SizedBox(height: 16),
+            Obx(
+              () => Text(
+                controller.errorMessage.value,
+                style: const TextStyle(color: Colors.red),
+              ),
             ),
-            TextButton(
+            const SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: controller.login,
+              child: const Text('Login'),
+            ),
+            const TextButton(
               onPressed: null, // No logic, button disabled
               child: Text('Forgot Password?'),
             ),

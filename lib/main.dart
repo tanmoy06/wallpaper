@@ -9,7 +9,9 @@ void main() async {
   await Firebase.initializeApp();
   runApp(
     GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Application",
+      theme: ThemeData.dark(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),
