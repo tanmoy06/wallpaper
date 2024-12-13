@@ -17,25 +17,37 @@ class SignupView extends GetView<SignupController> {
             children: [
               TextField(
                 controller: controller.nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                ),
               ),
               const SizedBox(height: 16),
               TextField(
                 controller: controller.emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 16),
               TextField(
                 controller: controller.passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    labelText: 'Password'),
                 obscureText: true,
               ),
               const SizedBox(height: 16),
               TextField(
                 controller: controller.confirmPasswordController,
-                decoration:
-                    const InputDecoration(labelText: 'Confirm Password'),
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    labelText: 'Confirm Password'),
                 obscureText: true,
               ),
               const SizedBox(height: 16),
