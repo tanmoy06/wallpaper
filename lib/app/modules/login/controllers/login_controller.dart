@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,7 +7,7 @@ class LoginController extends GetxController {
   final emailController = TextEditingController();
   var errorMessage = ''.obs;
 
-  void login() {
+  Future<void> login() async {
     final email = emailController.text.trim();
     final password = passController.text;
 
@@ -15,11 +16,23 @@ class LoginController extends GetxController {
       return;
     }
 
-    if (email == "test@gmail.com" && password == "pass123") {
-      Get.snackbar("Login Success", "Welcome!");
-      Get.toNamed('/home');
-    } else {
-      errorMessage.value = "Invalid email or password";
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then(
+            (value) => Get.toNamed('/images'),
+          );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        Get.snackbar('User not found!', 'No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        Get.snackbar(
+            'Wrong password!', 'Wrong password provided for that user.');
+      } else {
+        Get.snackbar('Somthing Wrong', e.toString());
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 

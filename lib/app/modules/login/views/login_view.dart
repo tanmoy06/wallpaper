@@ -44,13 +44,13 @@ class LoginView extends GetView<LoginController> {
                 style: const TextStyle(color: Colors.red),
               ),
             ),
-            const SizedBox(height: 20.0),
+            SizedBox(height: MediaQuery.sizeOf(context).height * .02),
             ElevatedButton(
               onPressed: controller.login,
               child: const Text('Login'),
             ),
-            const TextButton(
-              onPressed: null, // No logic, button disabled
+            TextButton(
+              onPressed: controller.login, // No logic, button disabled
               child: Text('Forgot Password?'),
             ),
           ],

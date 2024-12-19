@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +23,7 @@ class SignupController extends GetxController {
   }
 
   // Signup logic
-  void signup() {
+  Future<void> signup() async {
     final name = nameController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text;
@@ -42,11 +43,24 @@ class SignupController extends GetxController {
     }
 
     // Replace this with your signup logic
-    if (email == "test@gmail.com") {
-      Get.snackbar("Signup Success", "Welcome, $name!");
-      Get.toNamed('/login');
-    } else {
-      errorMessage.value = "Signup failed. Try again.";
+    try {
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          )
+          .then(
+            (value) => Get.toNamed('/images'),
+          );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        Get.snackbar("Week password!", 'The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        Get.snackbar(
+            "Existing account", "The account already exists for that email.");
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }
