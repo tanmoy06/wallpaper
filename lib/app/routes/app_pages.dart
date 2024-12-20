@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/authwrapper/bindings/authwrapper_binding.dart';
+import '../modules/authwrapper/views/authwrapper_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/images/bindings/images_binding.dart';
@@ -14,7 +16,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.AUTHWRAPPER;
 
   static final routes = [
     GetPage(
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.IMAGES,
       page: () => ImagesView(),
       binding: ImagesBinding(),
+    ),
+    GetPage(
+      name: _Paths.AUTHWRAPPER,
+      page: () => const AuthwrapperView(),
+      binding: AuthwrapperBinding(),
     ),
   ];
 }

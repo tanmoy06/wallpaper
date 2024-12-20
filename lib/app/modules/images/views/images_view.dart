@@ -11,6 +11,14 @@ class ImagesView extends GetView<ImagesController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Wallpapers"),
+        actions: [
+          IconButton(
+              onPressed: controller.signout,
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ))
+        ],
       ),
       body: Column(
         children: [

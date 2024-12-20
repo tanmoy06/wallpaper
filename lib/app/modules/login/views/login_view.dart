@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import 'package:wallpaper/app/services/responsive_ui_service.dart';
+
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -27,7 +29,7 @@ class LoginView extends GetView<LoginController> {
               ),
               keyboardType: TextInputType.emailAddress,
             ),
-            const SizedBox(height: 16.0),
+            16.kheightBox,
             TextField(
               controller: controller.passController,
               decoration: const InputDecoration(
@@ -37,14 +39,14 @@ class LoginView extends GetView<LoginController> {
               ),
               obscureText: true,
             ),
-            const SizedBox(height: 16),
+            16.kheightBox,
             Obx(
               () => Text(
                 controller.errorMessage.value,
                 style: const TextStyle(color: Colors.red),
               ),
             ),
-            SizedBox(height: MediaQuery.sizeOf(context).height * .02),
+            20.kheightBox,
             ElevatedButton(
               onPressed: controller.login,
               child: const Text('Login'),
@@ -53,6 +55,10 @@ class LoginView extends GetView<LoginController> {
               onPressed: controller.login, // No logic, button disabled
               child: Text('Forgot Password?'),
             ),
+            TextButton(
+              onPressed: controller.toSignUpPage,
+              child: Text("Don't have account? create account"),
+            )
           ],
         ),
       ),

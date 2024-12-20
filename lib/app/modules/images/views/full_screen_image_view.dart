@@ -9,13 +9,17 @@ class FullScreenImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop(); // Close fullscreen on tap
-          },
-          child: Image.network(imageUrl, fit: BoxFit.cover),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop(); // Close fullscreen on tap
+            },
+            child: Image.network(imageUrl, fit: BoxFit.cover),
+          ),
+          ElevatedButton(onPressed: null, child: Text('Set Wallpaper'))
+        ],
       ),
     );
   }

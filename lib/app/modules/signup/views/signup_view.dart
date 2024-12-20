@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wallpaper/app/services/responsive_ui_service.dart';
 import '../controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
@@ -11,10 +12,12 @@ class SignupView extends GetView<SignupController> {
       appBar: AppBar(title: const Text('Signup')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
+        child: Center(
           child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              30.kheightBox,
               TextField(
                 controller: controller.nameController,
                 decoration: InputDecoration(
@@ -23,7 +26,7 @@ class SignupView extends GetView<SignupController> {
                       borderRadius: BorderRadius.circular(20)),
                 ),
               ),
-              const SizedBox(height: 16),
+              16.kheightBox,
               TextField(
                 controller: controller.emailController,
                 decoration: InputDecoration(
@@ -32,7 +35,7 @@ class SignupView extends GetView<SignupController> {
                     labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
               ),
-              const SizedBox(height: 16),
+              16.kheightBox,
               TextField(
                 controller: controller.passwordController,
                 decoration: InputDecoration(
@@ -41,7 +44,7 @@ class SignupView extends GetView<SignupController> {
                     labelText: 'Password'),
                 obscureText: true,
               ),
-              const SizedBox(height: 16),
+              16.kheightBox,
               TextField(
                 controller: controller.confirmPasswordController,
                 decoration: InputDecoration(
@@ -50,12 +53,12 @@ class SignupView extends GetView<SignupController> {
                     labelText: 'Confirm Password'),
                 obscureText: true,
               ),
-              const SizedBox(height: 16),
+              16.kheightBox,
               Obx(() => Text(
                     controller.errorMessage.value,
                     style: const TextStyle(color: Colors.red),
                   )),
-              const SizedBox(height: 16),
+              16.kheightBox,
               ElevatedButton(
                 onPressed: controller.signup,
                 child: const Text('Signup'),

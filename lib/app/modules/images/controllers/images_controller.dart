@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper/app/data/repositories/image_repositories.dart';
 
@@ -19,5 +20,10 @@ class ImagesController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void signout() {
+    FirebaseAuth.instance.signOut();
+    Get.offAllNamed('/login');
   }
 }

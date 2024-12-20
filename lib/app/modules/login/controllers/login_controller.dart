@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wallpaper/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
   final passController = TextEditingController();
@@ -34,6 +35,10 @@ class LoginController extends GetxController {
     } catch (e) {
       rethrow;
     }
+  }
+
+  void toSignUpPage() {
+    Get.toNamed(Routes.SIGNUP);
   }
 
   @override
