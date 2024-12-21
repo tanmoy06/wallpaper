@@ -9,6 +9,7 @@ class SignupView extends GetView<SignupController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: const Text('Signup')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -23,42 +24,52 @@ class SignupView extends GetView<SignupController> {
                 decoration: InputDecoration(
                   labelText: 'Name',
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
               ),
-              16.kheightBox,
+              20.kheightBox,
               TextField(
                 controller: controller.emailController,
                 decoration: InputDecoration(
+                    errorText: controller.emailError.isNotEmpty
+                        ? controller.emailError
+                        : null,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)),
                     labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
               ),
-              16.kheightBox,
+              20.kheightBox,
               TextField(
                 controller: controller.passwordController,
                 decoration: InputDecoration(
+                    errorText: controller.passError.isNotEmpty
+                        ? controller.passError
+                        : null,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)),
                     labelText: 'Password'),
                 obscureText: true,
               ),
-              16.kheightBox,
+              20.kheightBox,
               TextField(
                 controller: controller.confirmPasswordController,
                 decoration: InputDecoration(
+                    errorText: controller.passError.isNotEmpty
+                        ? controller.passError
+                        : null,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)),
                     labelText: 'Confirm Password'),
                 obscureText: true,
               ),
-              16.kheightBox,
+              20.kheightBox,
               Obx(() => Text(
                     controller.errorMessage.value,
                     style: const TextStyle(color: Colors.red),
                   )),
-              16.kheightBox,
+              20.kheightBox,
               ElevatedButton(
                 onPressed: controller.signup,
                 child: const Text('Signup'),

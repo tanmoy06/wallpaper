@@ -11,16 +11,9 @@ class SignupController extends GetxController {
 
   // RxString for error messages
   var errorMessage = ''.obs;
-
+  var emailError = '';
+  var passError = '';
   // Dispose controllers to free memory
-  @override
-  void onClose() {
-    nameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    super.onClose();
-  }
 
   // Signup logic
   Future<void> signup() async {
@@ -38,7 +31,7 @@ class SignupController extends GetxController {
     }
 
     if (password != confirmPassword) {
-      errorMessage.value = "Passwords do not match";
+      passError = "Passwords do not match";
       return;
     }
 
@@ -53,14 +46,54 @@ class SignupController extends GetxController {
             (value) => Get.toNamed('/images'),
           );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        Get.snackbar("Week password!", 'The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        Get.snackbar(
-            "Existing account", "The account already exists for that email.");
+      switch (e.code) {
+        case 'invalid-email':
+          emailError = 'The email address is not valid.';
+          break;
+        case 'weak-password':
+          passError = 'The password is too weak.';
+          break;
+        case 'email-already-in-use':
+          emailError = 'An account already exists for this email.';
+          break;
+        default:
+          errorMessage.value = 'An unexpected error occurred: ${e.message}';
       }
+
+      // Display error message to user (replace with your UI logic)
     } catch (e) {
-      rethrow;
+      print('Error: $e'); // Handle unexpected errors
     }
+  }
+
+  Future<void> sendEmailVerification() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+      print('Verification email sent!');
+    }
+  }
+
+  Future<void> checkEmailVerified() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      await user.reload();
+      if (user.emailVerified) {
+        print('Email is verified!');
+      } else {
+        print('Email is not verified.');
+      }
+    }
+  }
+
+  @override
+  void onClose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.onClose();
   }
 }
